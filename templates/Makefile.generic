@@ -1,0 +1,10 @@
+.PHONY: help fmt check
+
+help: ## EN: Show targets / PT: Mostrar targets
+	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "%-12s %s\n", $$1, $$2}'
+
+fmt: ## EN: Format with prettier if present / PT: Formatar com prettier se existir
+	@command -v npx >/dev/null && npx --yes prettier -w . || echo "prettier not available"
+
+check: ## EN: Basic sanity / PT: Verificação básica
+	@echo "OK"

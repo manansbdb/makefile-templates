@@ -1,0 +1,19 @@
+.PHONY: help install lint test build clean
+
+help: ## EN: Show targets / PT: Mostrar targets
+	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "%-12s %s\n", $$1, $$2}'
+
+install: ## EN: Install deps / PT: Instalar deps
+	npm ci
+
+lint: ## EN: Lint / PT: Lint
+	npm run lint
+
+test: ## EN: Test / PT: Testar
+	npm test
+
+build: ## EN: Build / PT: Compilar
+	npm run build
+
+clean: ## EN: Clean artifacts / PT: Limpar artefactos
+	rm -rf dist coverage

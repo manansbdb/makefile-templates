@@ -1,0 +1,20 @@
+.PHONY: help install lint test run clean
+
+help: ## EN: Show targets / PT: Mostrar targets
+	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "%-12s %s\n", $$1, $$2}'
+
+install: ## EN: Install deps / PT: Instalar deps
+	python -m pip install -r requirements.txt
+
+lint: ## EN: Lint with ruff / PT: Lint com ruff
+	ruff check .
+
+test: ## EN: Run pytest / PT: Correr pytest
+	pytest -q
+
+run: ## EN: Run module / PT: Correr módulo
+	python -m cli
+
+clean: ## EN: Clean caches / PT: Limpar caches
+	find . -type d -name '__pycache__' -exec rm -rf {} +
+	rm -rf .pytest_cache .ruff_cache .mypy_cache
